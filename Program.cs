@@ -14,7 +14,12 @@ if (string.IsNullOrWhiteSpace(bandName) || string.IsNullOrWhiteSpace(city))
     return;
 }
 
-const string apiKey = "4Eg3Ue1g2UNLzOr98CurHp8OTXPM0N0j";
+var apiKey = Environment.GetEnvironmentVariable("TICKETMASTER_API_KEY");
+if (string.IsNullOrWhiteSpace(apiKey))
+{
+    Console.WriteLine("TICKETMASTER_API_KEY is not configured.");
+    return;
+}
 var today = DateTime.UtcNow.Date;
 var lastDay = today.AddMonths(2);
 var startDateTime = today.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'", CultureInfo.InvariantCulture);
