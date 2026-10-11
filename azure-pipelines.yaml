@@ -1,0 +1,57 @@
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: Release
+  BAND_NAME: BLACK SABBITCH
+  CITY: Wien
+
+steps:
+  - task: UseDotNet@2
+    displayName: Install .NET 8
+    inputs:
+      packageType: sdk
+      version: 8.x
+
+  - script: |
+      dotnet build ConcertFinder.csproj \
+        --configuration $(buildConfiguration)
+    displayName: Build application
+
+  - script: |
+      dotnet run \
+        --project ConcertFinder.TestRunner/ConcertFinder.TestRunner.csproj \
+        --configuration $(buildConfiguration)
+    displayName: Run tests
+
+  - script: |
+      printf '%s\n%s\n' "$BAND_NAME" "$CITY" |
+        dotnet run \
+          --project ConcertFinder.csproj \
+          --configuration $(buildConfiguration) \
+          --no-build
+    displayName: Run Concert Finder
+    env:
+      TICKETMASTER_API_KEY: $(TICKETMASTER_API_KEY)
+      BAND_NAME: $(BAND_NAME)
+      CITY: $(CITY)
+
+  - task: DotNetCoreCLI@2
+    displayName: Publish application
+    inputs:
+      command: publish
+      publishWebProjects: false
+      projects: ConcertFinder.csproj
+      arguments: >-
+        --configuration $(buildConfiguration)
+        --output $(Build.ArtifactStagingDirectory)
+      zipAfterPublish: false
+
+  - task: PublishPipelineArtifact@1
+    displayName: Publish artifact
+    inputs:
+      targetPath: $(Build.ArtifactStagingDirectory)
+      artifact: concert-finder
