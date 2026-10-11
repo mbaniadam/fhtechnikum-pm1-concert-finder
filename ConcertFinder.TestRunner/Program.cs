@@ -1,15 +1,15 @@
-var today = new DateTime(2026, 10, 4);
+var today = new DateTime(2026, 10, 11);
 var concerts = new[]
 {
     new Concert("No date", null),
     new Concert("Past", new DateTime(2026, 10, 3)),
     new Concert("Too late", new DateTime(2027, 1, 10)),
-    new Concert("Muse", new DateTime(2026, 11, 10))
+    new Concert("Muse", new DateTime(2026, 12, 10))
 };
 
 var result = ConcertFinder.FindUpcoming(concerts, today);
 
-if (result?.Name != "Muse" || result.Date != new DateTime(2026, 11, 10))
+if (result?.Name != "Muse" || result.Date != new DateTime(2026, 12, 10))
 {
     throw new Exception("FindUpcoming did not return the expected concert.");
 }
