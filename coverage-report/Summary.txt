@@ -1,0 +1,23 @@
+Summary
+  Generated on: 07.10.2026 - 14:10:54
+  Coverage date: 07.10.2026 - 14:10:37
+  Parser: Cobertura
+  Assemblies: 1
+  Classes: 1
+  Files: 1
+  Line coverage: 81.8%
+  Covered lines: 9
+  Uncovered lines: 2
+  Coverable lines: 11
+  Total lines: 15
+  Branch coverage: 50% (4 of 8)
+  Covered branches: 4
+  Total branches: 8
+  Method coverage: 100% (1 of 1)
+  Full method coverage: 0% (0 of 1)
+  Covered methods: 1
+  Fully covered methods: 0
+  Total methods: 1
+
+ConcertFinder.Tests     81.8%
+  Program               81.8%
