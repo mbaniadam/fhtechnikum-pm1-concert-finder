@@ -3,6 +3,8 @@ trigger:
   branches:
     include:
       - "main"
+      - "develop"
+      - "master"
 
 pr:
   branches:
