@@ -2,12 +2,13 @@ trigger:
   batch: false
   branches:
     include:
-      - "*"
+      - "main"
 
 pr:
   branches:
     include:
       - "*"
+
 pool:
   vmImage: ubuntu-latest
 
